@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,6 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/selamatdatang', function () {
+    return view('selamatdatang');
+});
+
+Route::get('/coba-facade',[PageController::class,'cobaFacade']);
+
+Route::get('/mahasiswaget', [PageController::class,'index']);
+Route::get('/mahasiswa',[PageController::class,'tampil']);
+Route::get('/coba-class',[PageController::class,'cobaClass']);
+
 
 Route::get('/hello', function () {
     $hello = 'Hello World';
@@ -41,3 +53,7 @@ Route::get('/hellooo', function () {
 
     return $hello;
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
