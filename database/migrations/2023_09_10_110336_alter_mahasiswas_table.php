@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('mahasiswas', function (Blueprint $table) {
-            $table->renameColumn('nama', 'nama_lengkap');
-            $table->text('alamat')->after('tanggal_lahir');
-            $table->dropColumn('ipk');
+            $table->char('jenis_kelamin', 1);
+            $table->string('jurusan');
+            $table->text('alamat')->nullable();
         });
     }
 
@@ -23,10 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('mahasiswas', function (Blueprint $table) {
-        //     $table->renameColumn('nama_lengkap','nama');
-        //     $table->dropColumn('alamat');
-        //     $table->decimal('ipk',3,2)->default(1.00);
-        // });
+        Schema::table('mahasiswas', function (Blueprint $table) {
+            //
+        });
     }
 };

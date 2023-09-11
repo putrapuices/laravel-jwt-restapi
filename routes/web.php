@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MahasiswasajaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,22 @@ Route::get('/selamatdatang', function () {
     return view('selamatdatang');
 });
 
+// =================materi crud=========================================
+
+ Route::get('/mahasiswas', [MahasiswasajaController::class,'index'])
+ ->name('mahasiswas.index');
+ Route::get('/mahasiswas/create', [MahasiswasajaController::class,'create'])
+ ->name('mahasiswas.create');
+ Route::post('/mahasiswas', [MahasiswasajaController::class,'store'])
+ ->name('mahasiswas.store');
+ Route::get('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class,'show'])
+ ->name('mahasiswas.show');
+ Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswasajaController::class,'edit'])
+->name('mahasiswas.edit');
+// ===============end materi crud=======================================
+
+
+
 Route::get('/coba-facade', [PageController::class, 'cobaFacade']);
 
 Route::get('/mahasiswaget', [PageController::class, 'index']);
@@ -43,8 +60,23 @@ Route::get(
 
 
 Route::get('/mahasiswaindex', [MahasiswaController::class, 'index']);
-Route::post('/proses-form', [MahasiswaController::class,'prosesForm']);
-Route::post('/proses-form-request', [MahasiswaController::class,'prosesFormRequest']);
+Route::post('/proses-form', [MahasiswaController::class, 'prosesForm']);
+Route::post('/proses-form-request', [MahasiswaController::class, 'prosesFormRequest']);
+
+
+Route::get('/form-pendaftaran/id', [
+    MahasiswaController::class,
+    'formPendaftaranId'
+]);
+
+Route::get('/form-pendaftaran/en', [
+    MahasiswaController::class,
+    'formPendaftaranEn'
+]);
+
+// agar dinamis tidak perlu buat "/id" atau "/en" seperti diatas
+Route::get('/form-pendaftarandynamic/{locale?}',[MahasiswaController::class,
+'formPendaftarandynamic']);
 
 // ===========================================================================================
 

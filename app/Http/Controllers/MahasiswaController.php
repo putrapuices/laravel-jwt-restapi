@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Mahasiswa;
 use Illuminate\Contracts\Validation\Validator;
 use App\Http\Requests\DaftarMahasiswa;
+use Illuminate\Support\Facades\App;
 
 class MahasiswaController extends Controller
 {
@@ -16,6 +17,25 @@ class MahasiswaController extends Controller
     {
         return view('form-pendaftaran');
     }
+
+    public function formPendaftaranId()
+    {
+        App::setLocale('id');
+        return view('form-pendaftaran');
+    }
+
+    public function formPendaftaranEn()
+    {
+        App::setLocale('en');
+        return view('form-pendaftaran');
+    }
+
+    public function formPendaftarandynamic($locale = 'id')
+    {
+        App::setLocale($locale);
+        return view('form-pendaftaran');
+    }
+
 
     public function prosesFormRequest(DaftarMahasiswa $request)
     {
@@ -120,6 +140,8 @@ class MahasiswaController extends Controller
         echo "<br>";
         echo $request->alamat;
     }
+
+
 
     // ==========================raw query==========================================================
     // ==================================================facades========================

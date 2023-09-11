@@ -17,9 +17,10 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     <style type="text/css">
-        i{
+        i {
             font-size: 50px;
         }
+
     </style>
 </head>
 <body>
@@ -28,16 +29,20 @@
         <main class="container">
             <h1> How to Install Bootstrap 5 in Laravel 10 - ItSolutionstuiff.com</h1>
             <div class="card">
-              <div class="card-header">
-                Icons
-              </div>
-              <div class="card-body text-center">
+                <div class="card-header">
+                    <h1 style="text-align: center">
+                        {{ __('test.judul') }}
+                        <br />
+                        @lang('test.judul2')
+                    </h1>
+                </div>
+                <div class="card-body text-center">
                     <i class="bi bi-bag-heart-fill"></i>
                     <i class="bi bi-app"></i>
                     <i class="bi bi-arrow-right-square-fill"></i>
                     <i class="bi bi-bag-check-fill"></i>
                     <i class="bi bi-calendar-plus-fill"></i>
-              </div>
+                </div>
             </div>
         </main>
     </div>
