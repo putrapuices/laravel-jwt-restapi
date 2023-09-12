@@ -80,4 +80,29 @@ class MahasiswasajaController extends Controller
     {
         return view('mahasiswasaja.edit', ['mahasiswa' => $mahasiswa]);
     }
+
+    public function update(Request $request, Mahasiswasaja $mahasiswa)
+    {
+        $validateData = $request->validate([
+            'nim' => 'required|size:8|unique:mahasiswas,nim,' . $mahasiswa->id,
+            'nama' => 'required|min:3|max:50',
+            'jenis_kelamin' => 'required|in:P,L',
+            'jurusan' => 'required',
+            'alamat' => '',
+        ]);
+
+        // Mahasiswasaja::where('id', $mahasiswa->id)->update($validateData);
+        // atau tanpa class Mahasiswasaja
+        $mahasiswa->update($validateData);
+
+        return redirect()->route('mahasiswas.show', ['mahasiswa' => $mahasiswa->id])
+            ->with('pesan', "Update data {$validateData['nama']} berhasil");
+    }
+
+    public function destroy(Mahasiswasaja $mahasiswa)
+    {
+        $mahasiswa->delete();
+        return redirect()->route('mahasiswas.index')
+            ->with('pesan', "Hapus data $mahasiswa->nama berhasil");
+    }
 }

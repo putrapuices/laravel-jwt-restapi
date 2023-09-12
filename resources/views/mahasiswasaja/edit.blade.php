@@ -13,10 +13,10 @@
     <div class="container pt-4 bg-white">
         <div class="row">
             <div class="col-md-8 col-xl-6">
-                <h1>Edit Mahasiswa</h1>
-                <hr>
 
-                <form action="" method="POST">
+
+                <form action="{{ route('mahasiswas.update',['mahasiswa' => $mahasiswa->id]) }}" method="POST">
+                    @method('PUT')
                     @csrf
                     <div class="mb-3">
                         <label class="form-label" for="nim">NIM</label>

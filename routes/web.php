@@ -27,16 +27,20 @@ Route::get('/selamatdatang', function () {
 
 // =================materi crud=========================================
 
- Route::get('/mahasiswas', [MahasiswasajaController::class,'index'])
- ->name('mahasiswas.index');
- Route::get('/mahasiswas/create', [MahasiswasajaController::class,'create'])
- ->name('mahasiswas.create');
- Route::post('/mahasiswas', [MahasiswasajaController::class,'store'])
- ->name('mahasiswas.store');
- Route::get('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class,'show'])
- ->name('mahasiswas.show');
- Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswasajaController::class,'edit'])
-->name('mahasiswas.edit');
+Route::get('/mahasiswas', [MahasiswasajaController::class, 'index'])
+    ->name('mahasiswas.index');
+Route::get('/mahasiswas/create', [MahasiswasajaController::class, 'create'])
+    ->name('mahasiswas.create');
+Route::post('/mahasiswas', [MahasiswasajaController::class, 'store'])
+    ->name('mahasiswas.store');
+Route::get('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'show'])
+    ->name('mahasiswas.show');
+Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswasajaController::class, 'edit'])
+    ->name('mahasiswas.edit');
+Route::put('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'update'])
+    ->name('mahasiswas.update');
+Route::delete('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'destroy'])
+    ->name('mahasiswas.destroy');
 // ===============end materi crud=======================================
 
 
@@ -75,8 +79,10 @@ Route::get('/form-pendaftaran/en', [
 ]);
 
 // agar dinamis tidak perlu buat "/id" atau "/en" seperti diatas
-Route::get('/form-pendaftarandynamic/{locale?}',[MahasiswaController::class,
-'formPendaftarandynamic']);
+Route::get('/form-pendaftarandynamic/{locale?}', [
+    MahasiswaController::class,
+    'formPendaftarandynamic'
+]);
 
 // ===========================================================================================
 
