@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MahasiswasajaController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,22 @@ Route::get('/', function () {
 Route::get('/selamatdatang', function () {
     return view('selamatdatang');
 });
+
+// ====================================================================
+Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
+Route::post('/file-upload', [FileUploadController::class, 'prosesfileUpload']);
+
+//berikut case study
+Route::get('/file-upload-rename', [
+    FileUploadController::class,
+    'fileUploadRename'
+]);
+
+Route::post('/file-upload-rename', [
+    FileUploadController::class,
+    'prosesFileUploadRename'
+]);
+
 
 // =================materi crud=========================================
 
