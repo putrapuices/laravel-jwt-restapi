@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MahasiswamiddlewareController;
 use App\Http\Controllers\MahasiswasajaController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,40 +27,7 @@ Route::get('/selamatdatang', function () {
     return view('selamatdatang');
 });
 
-// ====================================================================
-Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
-Route::post('/file-upload', [FileUploadController::class, 'prosesfileUpload']);
-
-//berikut case study
-Route::get('/file-upload-rename', [
-    FileUploadController::class,
-    'fileUploadRename'
-]);
-
-Route::post('/file-upload-rename', [
-    FileUploadController::class,
-    'prosesFileUploadRename'
-]);
-
-
-// =================materi crud=========================================
-
-Route::get('/mahasiswas', [MahasiswasajaController::class, 'index'])
-    ->name('mahasiswas.index');
-Route::get('/mahasiswas/create', [MahasiswasajaController::class, 'create'])
-    ->name('mahasiswas.create');
-Route::post('/mahasiswas', [MahasiswasajaController::class, 'store'])
-    ->name('mahasiswas.store');
-Route::get('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'show'])
-    ->name('mahasiswas.show');
-Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswasajaController::class, 'edit'])
-    ->name('mahasiswas.edit');
-Route::put('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'update'])
-    ->name('mahasiswas.update');
-Route::delete('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'destroy'])
-    ->name('mahasiswas.destroy');
-// ===============end materi crud=======================================
-
+//====================================================================================================
 
 
 Route::get('/coba-facade', [PageController::class, 'cobaFacade']);
@@ -206,6 +174,61 @@ Route::get('/hellooo', function () {
 
     return $hello;
 });
+
+
+
+
+
+// =================materi crud=========================================
+
+Route::get('/mahasiswas', [MahasiswasajaController::class, 'index'])
+    ->name('mahasiswas.index');
+Route::get('/mahasiswas/create', [MahasiswasajaController::class, 'create'])
+    ->name('mahasiswas.create');
+Route::post('/mahasiswas', [MahasiswasajaController::class, 'store'])
+    ->name('mahasiswas.store');
+Route::get('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'show'])
+    ->name('mahasiswas.show');
+Route::get('/mahasiswas/{mahasiswa}/edit', [MahasiswasajaController::class, 'edit'])
+    ->name('mahasiswas.edit');
+Route::put('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'update'])
+    ->name('mahasiswas.update');
+Route::delete('/mahasiswas/{mahasiswa}', [MahasiswasajaController::class, 'destroy'])
+    ->name('mahasiswas.destroy');
+// ===============end materi crud=======================================
+
+// =============================upload file=======================================
+Route::get('/file-upload', [FileUploadController::class, 'fileUpload']);
+Route::post('/file-upload', [FileUploadController::class, 'prosesfileUpload']);
+
+//berikut case study
+Route::get('/file-upload-rename', [
+    FileUploadController::class,
+    'fileUploadRename'
+]);
+
+Route::post('/file-upload-rename', [
+    FileUploadController::class,
+    'prosesFileUploadRename'
+]);
+// =============================end upload file=======================================
+
+//==========================midleware===========================================
+// Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class, 'daftarMahasiswa'])->middleware('coba');
+Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class, 'daftarMahasiswa']);
+Route::get('/tabel-mahasiswa', [MahasiswamiddlewareController::class, 'tabelMahasiswa']);
+Route::get('/blog-mahasiswa', [MahasiswamiddlewareController::class, 'blogMahasiswa']);
+// =============================end midleware=======================================
+//===============================session=======================================
+Route::get('/', [SessionController::class, 'index']);
+Route::get('/buat-session', [SessionController::class, 'buatSession']);
+Route::get('/akses-session', [SessionController::class, 'aksesSession']);
+Route::get('/hapus-session', [SessionController::class, 'hapusSession']);
+Route::get('/flash-session', [SessionController::class, 'flashSession']);
+
+
+
+//================================end session========================
 
 Auth::routes();
 
