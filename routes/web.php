@@ -6,6 +6,7 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MahasiswamiddlewareController;
 use App\Http\Controllers\MahasiswasajaController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -226,9 +227,31 @@ Route::get('/akses-session', [SessionController::class, 'aksesSession']);
 Route::get('/hapus-session', [SessionController::class, 'hapusSession']);
 Route::get('/flash-session', [SessionController::class, 'flashSession']);
 
-
+// ini adalah contoh membuat flash session
+// redirect()->route('mahasiswas.index')->with('pesan', "Penambahan data berhasil");
 
 //================================end session========================
+//================================Case Study: Login Middleware==============================================
+Route::get('/loginsaja', [MahasiswamiddlewareController::class,'loginsaja']);
+ Route::post('/loginsaja', [MahasiswamiddlewareController::class,'prosesLogin']);
+
+ Route::get('/logout', [MahasiswamiddlewareController::class,'logout']);
+
+ Route::redirect('/', '/loginsaja');
+
+ Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class,'daftarMahasiswa'])
+ ->middleware('loginsaja');
+
+ Route::get('/tabel-mahasiswa', [MahasiswamiddlewareController::class,'tabelMahasiswa'])
+ ->middleware('loginsaja');
+
+ Route::get('/blog-mahasiswa', [MahasiswamiddlewareController::class,'blogMahasiswa'])
+ ->middleware('loginsaja');
+
+
+
+
+//================================================================================
 
 Auth::routes();
 

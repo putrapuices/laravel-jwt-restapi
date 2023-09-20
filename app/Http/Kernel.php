@@ -72,5 +72,7 @@ class Kernel extends HttpKernel
 
         'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
         'coba' => \App\Http\Middleware\CobaMiddleware::class,
+        'loginsaja' => \App\Http\Middleware\CekLogin::class,
+
     ];
 }
