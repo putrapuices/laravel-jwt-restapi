@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\JurusanController;
+use App\Http\Controllers\MahasiswaauthController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MahasiswamiddlewareController;
 use App\Http\Controllers\MahasiswasajaController;
@@ -28,10 +30,21 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/daftar-mahasiswaauth', [MahasiswaauthController::class,'daftarMahasiswa'])
+ ->middleware('auth');
+
+ Route::get('/tabel-mahasiswaauth', [MahasiswaauthController::class,'tabelMahasiswa'])
+ ->middleware('auth');
+
+ Route::get('/blog-mahasiswaauth', [MahasiswaauthController::class,'blogMahasiswa'])
+ ->middleware('auth');
 
 Route::get('/selamatdatang', function () {
     return view('selamatdatang');
 });
+//=============================================================================================
+Route::get('/jurusan', [JurusanController::class,'index'])->middleware('auth');
+Route::resource('jurusans',JurusanController::class)->middleware('auth');
 
 //====================================================================================================
 
