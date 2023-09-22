@@ -33,6 +33,11 @@
                             Blog Mahasiswa
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/login')}}">
+                            L.O.G.I.N
+                        </a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mt-2 mt-md-0">
                     <li class="nav-item">

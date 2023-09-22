@@ -7,9 +7,11 @@
 
             <div class="py-4 d-flex justify-content-between align-items-center">
                 <h1 class="h2">Tabel Jurusan</h1>
+                @can('create', App\Models\Jurusan::class)
                 <a href="{{url('/jurusans/create')}}" class="btn btn-primary">
                     Tambah Jurusan
                 </a>
+                @endcan
             </div>
 
             @if(session()->has('pesan'))
@@ -32,9 +34,14 @@
                     <tr>
                         <th>{{$loop->iteration}}</th>
                         <td>
+                            @can('view', $jurusan)
                             <a href="{{ url('/jurusans/'.$jurusan->id) }}">
                                 {{$jurusan->nama_jurusan}}
                             </a>
+                            @endcan
+                            @cannot('view', $jurusan)
+                            {{$jurusan->nama_jurusan}}
+                            @endcannot
                         </td>
                         <td>{{$jurusan->nama_dekan}}</td>
                         <td>{{$jurusan->jumlah_mahasiswa}}</td>

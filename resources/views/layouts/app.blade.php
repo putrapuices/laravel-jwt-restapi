@@ -44,9 +44,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/jurusan')}}">Tabel Jurusan</a>
                         </li>
+                        @can('create', App\Models\Jurusan::class)
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('/jurusans/create')}}">Tambah Jurusan</a>
                         </li>
+                        @endcan
                         @endauth
                     </ul>
 

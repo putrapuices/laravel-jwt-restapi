@@ -30,27 +30,29 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/daftar-mahasiswaauth', [MahasiswaauthController::class,'daftarMahasiswa'])
- ->middleware('auth');
+Route::get('/daftar-mahasiswaauth', [MahasiswaauthController::class, 'daftarMahasiswa'])
+    ->middleware('auth');
 
- Route::get('/tabel-mahasiswaauth', [MahasiswaauthController::class,'tabelMahasiswa'])
- ->middleware('auth');
+Route::get('/tabel-mahasiswaauth', [MahasiswaauthController::class, 'tabelMahasiswa'])
+    ->middleware('auth');
 
- Route::get('/blog-mahasiswaauth', [MahasiswaauthController::class,'blogMahasiswa'])
- ->middleware('auth');
+Route::get('/blog-mahasiswaauth', [MahasiswaauthController::class, 'blogMahasiswa'])
+    ->middleware('auth');
 
 Route::get('/selamatdatang', function () {
     return view('selamatdatang');
 });
 //=============================================================================================
-Route::get('/jurusan', [JurusanController::class,'index'])->middleware('auth');
-Route::resource('jurusans',JurusanController::class)->middleware('auth');
+Route::get('/jurusan', [JurusanController::class, 'index'])->middleware('auth');
+Route::resource('jurusans', JurusanController::class)->middleware('auth');
+
+Route::get('jurusans/{jurusan}', [JurusanController::class, 'show'])
+    ->name('jurusans.show')->middleware('auth')->middleware('can:view,jurusan');
 
 //====================================================================================================
 
 
 Route::get('/coba-facade', [PageController::class, 'cobaFacade']);
-
 Route::get('/mahasiswaget', [PageController::class, 'index']);
 Route::get('/coba-class', [PageController::class, 'cobaClass']);
 Route::get('/mahasiswa', [PageController::class, 'tampil']);
@@ -66,11 +68,9 @@ Route::get(
     [MahasiswaController::class, 'info']
 )->name('info');
 
-
 Route::get('/mahasiswaindex', [MahasiswaController::class, 'index']);
 Route::post('/proses-form', [MahasiswaController::class, 'prosesForm']);
 Route::post('/proses-form-request', [MahasiswaController::class, 'prosesFormRequest']);
-
 
 Route::get('/form-pendaftaran/id', [
     MahasiswaController::class,
@@ -195,9 +195,6 @@ Route::get('/hellooo', function () {
 });
 
 
-
-
-
 // =================materi crud=========================================
 
 Route::get('/mahasiswas', [MahasiswasajaController::class, 'index'])
@@ -250,24 +247,23 @@ Route::get('/flash-session', [SessionController::class, 'flashSession']);
 
 //================================end session========================
 //================================Case Study: Login Middleware==============================================
-Route::get('/loginsaja', [MahasiswamiddlewareController::class,'loginsaja']);
- Route::post('/loginsaja', [MahasiswamiddlewareController::class,'prosesLogin']);
+Route::get('/loginsaja', [MahasiswamiddlewareController::class, 'loginsaja']);
+Route::post('/loginsaja', [MahasiswamiddlewareController::class, 'prosesLogin']);
 
- Route::get('/logout', [MahasiswamiddlewareController::class,'logout']);
+Route::get('/logout', [MahasiswamiddlewareController::class, 'logout']);
 
- Route::redirect('/', '/loginsaja');
+Route::redirect('/', '/loginsaja');
 
- Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class,'daftarMahasiswa'])
- ->middleware('loginsaja');
+Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class, 'daftarMahasiswa'])
+    ->middleware('loginsaja');
 
- Route::get('/tabel-mahasiswa', [MahasiswamiddlewareController::class,'tabelMahasiswa'])
- ->middleware('loginsaja');
+Route::get('/tabel-mahasiswa', [MahasiswamiddlewareController::class, 'tabelMahasiswa'])
+    ->middleware('loginsaja');
 
- Route::get('/blog-mahasiswa', [MahasiswamiddlewareController::class,'blogMahasiswa'])
- ->middleware('loginsaja');
+Route::get('/blog-mahasiswa', [MahasiswamiddlewareController::class, 'blogMahasiswa'])
+    ->middleware('loginsaja');
 
 
 
 
 //================================================================================
-

@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    <title>Sistem Informasi Mahasiswa</title>
+    <title>Berikut Ini Login yang Telah Di Custome</title>
+
 </head>
 <body>
 
@@ -31,6 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('/blog-mahasiswa')}}">
                             Blog Mahasiswa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url('/login')}}">
+                            L.O.G.I.N
                         </a>
                     </li>
                 </ul>
