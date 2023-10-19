@@ -1,0 +1,40 @@
+<?php
+
+function saveBase64Image($base64Data, $outputPath) {
+    // Pisahkan data base64 dari prefixnya
+    $base64Parts = explode(',', $base64Data);
+    $imageData = $base64Parts[1];
+
+    // Decode data base64 menjadi gambar
+    $decodedImage = base64_decode($imageData);
+
+    // Validasi format gambar (contoh: hanya JPG)
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_buffer($finfo, $decodedImage);
+    finfo_close($finfo);
+
+    if ($mimeType !== 'image/jpeg') {
+        return 'Invalid image format.';
+    }
+
+    // Validasi ukuran gambar (misalnya, maksimal 2MB)
+    $maxSize = 2 * 1024 * 1024; // 2MB dalam byte
+    if (strlen($decodedImage) > $maxSize) {
+        return 'Image size exceeds 2MB.';
+    }
+
+    // Simpan gambar ke lokasi yang ditentukan
+    if (file_put_contents($outputPath, $decodedImage)) {
+        return 'Image saved successfully.';
+    } else {
+        return 'Failed to save image.';
+    }
+}
+
+// Contoh penggunaan:
+$base64Data = $_POST['base64Data']; // Gantilah ini dengan cara Anda mendapatkan data base64
+$outputPath = 'path/to/save/image.jpg'; // Gantilah ini dengan path penyimpanan yang sesuai
+
+$result = saveBase64Image($base64Data, $outputPath);
+echo $result;
+?>
