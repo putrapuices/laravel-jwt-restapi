@@ -3,14 +3,15 @@
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\FileUploadController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JurusanController;
 use App\Http\Controllers\MahasiswaauthController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\MahasiswamiddlewareController;
 use App\Http\Controllers\MahasiswasajaController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +29,60 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// This call is equivalent to manually defining the following routes:
+
+// User registration routes
+// Route::get('/register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+// Route::post('/register', 'Auth\RegisterController@register');
+
+// User login routes
+// Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::post('/login', 'Auth\LoginController@login');
+
+// User logout route
+// Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Password reset routes
+// Route::get('/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+// Route::post('/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+// Route::get('/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+// Route::post('/password/reset', 'Auth\ResetPasswordController@reset');
+
+
+
+
+
+
+
+
+// ==================================================
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
+// ->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+
+
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])
+    ->middleware('can:update,user');
+
+Route::patch('/users/{user}', [UserController::class, 'update'])
+    ->middleware('can:update,user');
+
+Route::delete('/users/{user}', [UserController::class, 'destroy'])
+    ->middleware('can:delete,user');
+
+Route::patch('/users/{user}', [UserController::class, 'update'])
+    ->middleware('can:update,user');
+
+// ==========================================================
+
+
+
+
+
 
 Route::get('/daftar-mahasiswaauth', [MahasiswaauthController::class, 'daftarMahasiswa'])
     ->middleware('auth');
@@ -236,7 +290,7 @@ Route::get('/tabel-mahasiswa', [MahasiswamiddlewareController::class, 'tabelMaha
 Route::get('/blog-mahasiswa', [MahasiswamiddlewareController::class, 'blogMahasiswa']);
 // =============================end midleware=======================================
 //===============================session=======================================
-Route::get('/', [SessionController::class, 'index']);
+Route::get('/ceksession', [SessionController::class, 'index']);
 Route::get('/buat-session', [SessionController::class, 'buatSession']);
 Route::get('/akses-session', [SessionController::class, 'aksesSession']);
 Route::get('/hapus-session', [SessionController::class, 'hapusSession']);
@@ -252,7 +306,7 @@ Route::post('/loginsaja', [MahasiswamiddlewareController::class, 'prosesLogin'])
 
 Route::get('/logout', [MahasiswamiddlewareController::class, 'logout']);
 
-Route::redirect('/', '/loginsaja');
+Route::redirect('/loginsaja', '/loginsaja');
 
 Route::get('/daftar-mahasiswa', [MahasiswamiddlewareController::class, 'daftarMahasiswa'])
     ->middleware('loginsaja');

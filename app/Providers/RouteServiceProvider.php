@@ -17,7 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    // public const HOME = '/home';
+    public const HOME = '/';
 
     // jika ingin rute seperti laravel 7
     protected $namespace = 'App\\Http\\Controllers';
